@@ -1,0 +1,227 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "pygame_practice.ipynb",
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/alibekk93/pygame_practice/blob/main/pygame_practice.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Pygame practice"
+      ],
+      "metadata": {
+        "id": "GFKW1fIoNXB_"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Setup"
+      ],
+      "metadata": {
+        "id": "KSCG1VJqNgwu"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install pygame"
+      ],
+      "metadata": {
+        "id": "3LDUU2z2NitD",
+        "outputId": "3b6e6945-25e6-4629-8d5d-25ec57bb854d",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Requirement already satisfied: pygame in /usr/local/lib/python3.8/dist-packages (2.1.2)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install opencv-python"
+      ],
+      "metadata": {
+        "id": "F9ymzrcLP2MD",
+        "outputId": "b4267132-a1ad-4a8b-b153-1c8c1f5ed551",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Requirement already satisfied: opencv-python in /usr/local/lib/python3.8/dist-packages (4.6.0.66)\n",
+            "Requirement already satisfied: numpy>=1.17.3 in /usr/local/lib/python3.8/dist-packages (from opencv-python) (1.21.6)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pygame\n",
+        "from IPython.display import clear_output"
+      ],
+      "metadata": {
+        "id": "OgpEOJK0Opap",
+        "outputId": "fc1b10ca-0433-431d-cc1f-38dee1adfbe0",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "pygame 2.1.2 (SDL 2.0.16, Python 3.8.16)\n",
+            "Hello from the pygame community. https://www.pygame.org/contribute.html\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import cv2\n",
+        "import numpy as np"
+      ],
+      "metadata": {
+        "id": "vqTwoWPTP8PJ"
+      },
+      "execution_count": 4,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Tutorial from https://realpython.com/pygame-a-primer/"
+      ],
+      "metadata": {
+        "id": "WjURZQgsNa3w"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Initialize Pygame\n",
+        "pygame.init()\n",
+        "\n",
+        "# Set the window size\n",
+        "window_size = (400, 400)\n",
+        "\n",
+        "# Create an empty image\n",
+        "image = np.zeros((window_size[1], window_size[0], 3), np.uint8)\n",
+        "\n",
+        "# Create a window using opencv\n",
+        "cv2.namedWindow('Pygame window', cv2.WINDOW_NORMAL)\n",
+        "cv2.resizeWindow('Pygame window', window_size[0], window_size[1])\n",
+        "\n",
+        "# Run the Pygame loop\n",
+        "running = True\n",
+        "while running:\n",
+        "    # Update the Pygame window\n",
+        "    pygame.display.update()\n",
+        "    \n",
+        "    # Get the image from the Pygame window\n",
+        "    image = np.array(pygame.surfarray.array3d(screen))\n",
+        "    \n",
+        "    # Display the image using opencv\n",
+        "    cv2.imshow('Pygame window', image)\n",
+        "    \n",
+        "    # Handle events\n",
+        "    for event in pygame.event.get():\n",
+        "        if event.type == pygame.QUIT:\n",
+        "            running = False\n",
+        "\n",
+        "# Quit Pygame\n",
+        "pygame.quit()\n",
+        "\n",
+        "# Destroy the opencv window\n",
+        "cv2.destroyAllWindows()\n",
+        "\n",
+        "# Clear the output\n",
+        "clear_output()"
+      ],
+      "metadata": {
+        "id": "8PBd0q4-NgGA"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "qO_cSjFhM7iE"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "A7ozpI3UM7sh"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "lDkNiPk4M7vo"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "eXddiBluM7zc"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
